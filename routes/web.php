@@ -1,50 +1,16 @@
 <?php
 
-use App\Http\Controllers\ProdutosController;
-use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+//galeria, página principal
+Route::get('/',[ImagesController::class, 'index'])->name('images.index');
 
-Route::get('/', function () {
-    return view('home', ['pagina' => 'home']);
-})->name('home');
+//página de imagem
+Route::get('/show/{img}', [ImagesController::class, 'show'])->name('images.show');
 
-Route::get('produtos', [ProdutosController::class, 'index'])->name('produtos');
+//formulário
+Route::get('/new', [ImagesController::class, 'create'])->name('images.create');
 
-Route::get('/produtos/inserir', [ProdutosController::class, 'create'])->name('produtos.inserir');
-
-Route::post('/produtos/inserir', [ProdutosController::class, 'insert'])->name('produtos.gravar');
-
-Route::get('/produtos/{prod}', [ProdutosController::class, 'show'])->name('produtos.show');
-
-Route::get('/produtos/{prod}/editar', [ProdutosController::class, 'edit'])->name('produtos.edit');
-
-Route::put('/produtos/{prod}/editar', [ProdutosController::class, 'update'])->name('produtos.update');
-
-Route::get('/produtos/{prod}/apagar', [ProdutosController::class, 'remove'])->name('produtos.remove');
-
-Route::delete('/produtos/{prod}/apagar', [ProdutosController::class, 'delete'])->name('produtos.delete');
-
-Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-
-Route::prefix('usuarios')->group(function() {
-    
-    Route::get('/inserir', [UsuariosController::class, 'create'])->name('usuarios.inserir');
-    Route::post('/inserir', [UsuariosController::class, 'insert'])->name('usuarios.gravar');
-
-});
-
-Route::get('/login', [UsuariosController::class, 'login'])->name('login');
-Route::post('/login', [UsuariosController::class, 'login']);
-
-Route::get('/logout', [UsuariosController::class, 'logout'])->name('logout');
+//inserir no BD
+Route::post('/new', [ImagesController::class, 'insert'])->name('images.insert');
