@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-4">
 
-        <form method="post" action="{{ route('images.insert') }}">
+        <form method="post" action="{{ route('images.insert') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="img" class="form-label">Imagem:</label>
